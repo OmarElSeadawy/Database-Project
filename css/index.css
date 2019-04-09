@@ -1,0 +1,101 @@
+#main-wrap{
+	background-color: white;
+    border: 3px solid #f1f1f1;
+	border-radius : 10px;
+    width: 550px;
+	margin: 0 auto;
+}
+
+.avatar
+{
+    width:120px;
+    text-align: center;
+}
+
+.form
+{
+    width: 500px;
+    margin: 0 auto;
+}
+
+.inputvalues
+{
+    width:480px;
+    margin:0 auto;
+    padding: 5px;
+    font-display: Calibri;
+}
+
+.radiovalues
+{
+    padding: 5px;
+    margin-top:5px;
+    margin-bottom: 5px;
+}
+#login_button
+{
+    background-color: green;
+    padding: 5px;
+    color:white;
+    width:100%;
+    text-align: center;
+    font-size:16px;
+    font-weight: bold;
+    margin-top: 10px;
+
+}
+
+
+#reg_button
+{
+    background-color: red;
+    padding: 5px;
+    color:white;
+    width:100%;
+    text-align: center;
+    font-size:16px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+}
+
+
+#register_button
+{
+    background-color: green;
+    padding: 5px;
+    color:white;
+    width:100%;
+    text-align: center;
+    font-size:16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+#backtologin_button
+{
+    background-color: orange;
+    padding: 5px;
+    color:white;
+    width:30%;
+    text-align: center;
+    font-size:16px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+#logout_button
+{
+    background-color: red;
+    padding: 5px;
+    color:white;
+    width:100%;
+    text-align: center;
+    font-size:16px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}

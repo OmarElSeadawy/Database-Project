@@ -1,0 +1,23 @@
+@import url("home.css");
+
+.info
+{
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin: 3px;
+    padding: 2px;
+    text-align: center; 
+    text-decoration: none;
+    color: white;
+    font-family: sans-serif;
+
+}
+
+.restaurantimg
+{
+    margin:10px 10px;
+    max-width: 10%;
+    height: auto;
+    
+
+}

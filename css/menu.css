@@ -1,0 +1,17 @@
+@import url("home.css");
+
+.table-responsive
+{
+    color: white;
+    font-family: sans-serif;
+}
+
+.menuitems
+{
+    text-align: center;
+    padding: 5px;
+    margin: 2px;
+    letter-spacing: 2px;
+    text-decoration: blueviolet;
+    
+}

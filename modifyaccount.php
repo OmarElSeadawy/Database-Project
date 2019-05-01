@@ -36,30 +36,36 @@
                 </div>
             </header>
             <div class="welcome">
-            <form action='changepassword.php' method='POST'>
-                Old Password: <input type='text' name='oldpassword'><p>
-                New Password: <input type='password' name='newpassword'><br>
-                Repeat New Password: <input type='password' name='repeatedpassword'><br>
-                <input type='submit' name='submit' value='Change Password'> 
+            <form action='modifyaccount.php' method='POST'>
+                First Name : <input type='text' name='firstname'><p>
+                Last Name : <input type='text' name='lastname'><br>
+                Email : <input type='text' name='email'><br>
+                Birthdate : <input type='date' name='birthdate'><br>
+                Username : <input type='text' name='username'><br>
+                <input type='submit' name='submit' value='Submit Changes'> 
             </form>
 
             <?php
                 if(isset($_POST['submit']))
                 {
-                    if($_POST['oldpassword'] == $_SESSION['currentpassword'])
-                    {
-                        if($_POST['newpassword'] == $_POST['repeatedpassword'])
-                        {
-                            $query = "update user set password = '" . $_POST["newpassword"] ."'  where username = '" . $_SESSION["username"] ."' ";
-                            $query_run = mysqli_query($conn,$query);
-                            $_SESSION['currentpassword'] = $_POST['newpassword'];
-                            echo "<script> location.href='profile.php'; </script>";
-                        }
-                        else
-                            echo "Passwords Don't match";
-                   }
-                    else
-                        echo "Old Password doesn't match your password";
+                    $query = "update user set password = '" . $_SESSION["currentpassword"] ."' ";
+                    if($_POST['firstname'] != "")
+                        $query .= " , fname = '" . $_POST["firstname"] ."' ";
+                    if($_POST['lastname'] != "")
+                        $query .= " , lname = '" . $_POST["lastname"] ."' ";
+                    if($_POST['email'] != "")
+                        $query .= " , email = '" . $_POST["email"] ."' ";
+                    if($_POST['birthdate'] != "")
+                        $query .= " , bdate = '" . date('Y-m-d', strtotime(str_replace('-', '/', $_POST['birthdate']))) ."' ";
+                    if($_POST['username'] != "")
+                        $query .= " , username = '" . $_POST["username"] ."' ";
+                    
+                    $query .= " where username = '" . $_SESSION["username"] ."'";
+                    if($_POST['username'] != "")
+                        $_SESSION['username'] = $_POST["username"];
+                
+                    $query_run = mysqli_query($conn,$query);
+                    echo "<script> location.href='profile.php'; </script>";
                 }
             
             ?>

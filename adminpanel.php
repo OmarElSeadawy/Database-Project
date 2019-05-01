@@ -35,6 +35,17 @@
                     </ul>
                 </div>
 
+            <div class="welcome"> 
+                        
+			<?php
+                echo "<h2><a href='manageadmins.php'> Manage Admin Accounts </a></h2>";
+                echo "<br>";
+                echo "<h2><a href='manageordering.php'> Manage Ordering Staff Accounts </a></h2>";
+                echo "<br>";
+                echo "<h2><a href='managerestaurants.php'> Manage Restaurants </a></h2>";
+			?>
+
+            </div>
 
             </header>
 

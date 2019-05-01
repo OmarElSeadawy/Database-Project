@@ -34,10 +34,34 @@
                             <li onclick="window.location.href='index.php'"> <a>Logout</a></li>
                     </ul>
                 </div>
-
-
             </header>
+            <div class="welcome">
+            <form action='changepassword.php' method='POST'>
+                Old Password: <input type='text' name='oldpassword'><p>
+                New Password: <input type='password' name='newpassword'><br>
+                Repeat New Password: <input type='password' name='repeatedpassword'><br>
+                <input type='submit' name='submit' value='Change Password'> 
+            </form>
 
+            <?php
+                if(isset($_POST['submit']))
+                {
+                    if($_POST['oldpassword'] == $_SESSION['currentpassword'])
+                    {
+                        if($_POST['newpassword'] == $_POST['repeatedpassword'])
+                        {
+                            $query = "update user set password = '" . $_POST["newpassword"] ."'  where username = '" . $_SESSION["username"] ."' ";
+                            $query_run = mysqli_query($conn,$query);
+                        }
+                        else
+                            echo "Passwords Don't match";
+                   }
+                    else
+                        echo "Old Password doesn't match your password";
+                }
+            
+            ?>
+            </div>
         </body>
 
 

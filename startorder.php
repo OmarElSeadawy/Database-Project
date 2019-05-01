@@ -32,23 +32,23 @@
                             <?php endif; ?>
                             <li onclick="window.location.href='profile.php'"> <a>Profile</a></li>                            
                             <li onclick="window.location.href='index.php'"> <a>Logout</a></li>
-                    </ul>
+                    </ul>  
                     
-                    <!-- <div>    
                     <form action='startorder.php' method='post' name='filter' > 
-                    <select name="filter"> 
-                        <option value="Pizza">Pizza</option> 
-                        <option value="Fried Chicken">Fried Chicken</option> 
-                    </select> 
-                    <br/> 
-                    <input name="filter" type='submit' value ='filter'> 
+                        <select name="cuisinetype"> 
+                            <option value="Pizza">Pizza</option> 
+                            <option value="Fried Chicken">Fried Chicken</option> 
+                            </select> 
+                        <br/> 
+                        <input name="filter" type='submit' value ='filter'> 
                     </form>
-                    </div>
-                     -->
                 </div>
 
                 <?php
                 $query = "select r.restaurantname, c.cuisineType from restaurant r, restaurantcuisine c where r.restaurantid = c.restaurantid";
+                if(isset($_POST["filter"])) {
+                    $query .= " AND c.cuisineType = '" . $_POST["cuisinetype"] ."'";
+                }
                     
                 
                 $result = mysqli_query($conn, $query);
@@ -66,8 +66,8 @@
 						<img src="css/images/<?php echo $row["restaurantname"]; ?>.png" class="restaurantimg" />
 						<h4 class="info"><?php echo $row["restaurantname"]; ?></h4>
 						<h4 class="info"><?php echo $row["cuisineType"]; ?></h4>
-						<input type="hidden" name="hidden_name" value="<?php echo $row["restaurantname"]; ?>" />
-						<input type="hidden" name="hidden_price" value="<?php echo $row["cuisineType"]; ?>" />
+						<!-- <input type="hidden" name="hidden_name" value="<?php echo $row["restaurantname"]; ?>" />
+						<input type="hidden" name="hidden_price" value="<?php echo $row["cuisineType"]; ?>" /> -->
 						<input type="submit" name="currentrestaurant" style="margin-top:5px;" class="btn btn-success" value="<?php echo $row["restaurantname"]; ?>" />
 					</div>
 				</form>
@@ -84,12 +84,20 @@
         </body>
         
         <?php
-        if ($_SERVER['REQUEST_METHOD'] === 'POST')
+        if(isset($_POST['currentrestaurant']))
         {
             $_SESSION["currentmenu"] = $_POST["currentrestaurant"];
             echo $_POST["currentrestaurant"];
             header('location:menu.php');
-        }    
+        }
+        
+        //  if ($_SERVER['REQUEST_METHOD'] === 'POST')
+ 
+        // elseif(isset($_POST['filter']))
+        // {
+        //     $_SESSION['currentcuisine'] = $_POST['filter'];
+        //     header('location:startorder.php');
+        // }   
         ?>
 
 

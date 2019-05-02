@@ -70,7 +70,9 @@
                 {
                    echo '<script type="text/javascript"> alert("Failure") </script>';        
                 }
-
+                
+                echo "<a href='myorders.php' style='color:#ccc000'> My Orders </a>";
+                echo "<br>";
                 echo "<a href='modifyaccount.php' style='color:#cc0000'> Modify Information </a>";
                 echo "<br>";
                 echo "<a href='changepassword.php' style='color:#cc0000'> Change Password </a>";

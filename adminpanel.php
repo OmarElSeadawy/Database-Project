@@ -38,15 +38,19 @@
             <div class="welcome"> 
                         
 			<?php
-                echo "<h2><a href='manageadmins.php' style='color:#cc0000'> Manage Admin Accounts </a></h2>";
+                echo "<h2><a href='manageadmins.php' style='color:#ccc000'> Manage Admin Accounts </a></h2>";
                 echo "<br>";
-                echo "<h2><a href='manageordering.php' style='color:#cc0000'> Manage Ordering Staff Accounts </a></h2>";
+                echo "<h2><a href='manageordering.php' style='color:#ccc000'> Manage Ordering Staff Accounts </a></h2>";
                 echo "<br>";
-                echo "<h2><a href='managerestaurants.php' style='color:#cc0000'> Manage Restaurants </a></h2>";
+                echo "<h2><a href='managerestaurants.php' style='color:#ccc000'> Manage Restaurants </a></h2>";
                 echo "<br>";
-                echo "<h2><a href='managerestaurantsinfo.php' style='color:#cc0000'> Manage Restaurants Info </a></h2>";
+                echo "<h2><a href='managerestaurantsinfo.php' style='color:#ccc000'> Manage Restaurants Info </a></h2>";
                 echo "<br>";
-                echo "<h2><a href='managemenus.php' style='color:#cc0000'> Manage Menus </a></h2>";
+                echo "<h2><a href='managemenus.php' style='color:#ccc000'> Manage Menus </a></h2>";
+                echo "<br>";
+                echo "<h2><a href='manageitems.php' style='color:#ccc000'> Manage Items </a></h2>";
+                echo "<br>";
+                echo "<h2><a href='managediscounts.php' style='color:#ccc000'> Manage discounts </a></h2>";
             ?>
 
             </div>

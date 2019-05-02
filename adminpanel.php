@@ -38,12 +38,14 @@
             <div class="welcome"> 
                         
 			<?php
-                echo "<h2><a href='manageadmins.php'> Manage Admin Accounts </a></h2>";
+                echo "<h2><a href='manageadmins.php' style='color:#cc0000'> Manage Admin Accounts </a></h2>";
                 echo "<br>";
-                echo "<h2><a href='manageordering.php'> Manage Ordering Staff Accounts </a></h2>";
+                echo "<h2><a href='manageordering.php' style='color:#cc0000'> Manage Ordering Staff Accounts </a></h2>";
                 echo "<br>";
-                echo "<h2><a href='managerestaurants.php'> Manage Restaurants </a></h2>";
-			?>
+                echo "<h2><a href='managerestaurants.php' style='color:#cc0000'> Manage Restaurants </a></h2>";
+                echo "<br>";
+                echo "<h2><a href='managerestaurantsinfo.php' style='color:#cc0000'> Manage Restaurants Info </a></h2>";
+            ?>
 
             </div>
 

@@ -38,7 +38,7 @@
 
             
             <div class="welcome">
-                <h2> List of Administration Accounts </h2><br>
+                <h2> List of Ordering Staff Accounts </h2><br>
                 <?php
 
                     $selectquery = "select username from user where usertype = '1'";

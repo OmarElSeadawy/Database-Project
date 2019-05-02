@@ -45,6 +45,8 @@
                 echo "<h2><a href='managerestaurants.php' style='color:#cc0000'> Manage Restaurants </a></h2>";
                 echo "<br>";
                 echo "<h2><a href='managerestaurantsinfo.php' style='color:#cc0000'> Manage Restaurants Info </a></h2>";
+                echo "<br>";
+                echo "<h2><a href='managemenus.php' style='color:#cc0000'> Manage Menus </a></h2>";
             ?>
 
             </div>

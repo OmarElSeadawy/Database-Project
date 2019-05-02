@@ -33,7 +33,8 @@
                             <li onclick="window.location.href='profile.php'"> <a>Profile</a></li>                            
                             <li onclick="window.location.href='index.php'"> <a>Logout</a></li>
                     </ul>  
-                    
+                    </div>
+                    <div class='welcome'>
                     <form action='startorder.php' method='post' name='filter' > 
                         <select name="cuisinetype"> 
                             <option value="Pizza">Pizza</option> 
@@ -42,14 +43,41 @@
                         <br/> 
                         <input name="filter" type='submit' value ='filter'> 
                     </form>
-                </div>
 
+                    <form action='startorder.php' method='post' name='filterareaform' > 
+                        <select name="area"> 
+                            <option value="New Cairo">New Cairo</option> 
+                            <option value="Nasr City">Nasr City</option> 
+                            </select> 
+                        <br/> 
+                        <input name="filterarea" type='submit' value ='filterarea'> 
+                    </form>
+                    
+                    
+                    <form action='startorder.php' method='post' name='filteractivehrs' > 
+                        <input  type='submit' name="viewactive" value ='View Active Restaurants'> 
+                    </form>
                 <?php
-                $query = "select r.restaurantname, c.cuisineType from restaurant r, restaurantcuisine c where r.restaurantid = c.restaurantid";
-                if(isset($_POST["filter"])) {
+
+                $query = "select distinct(r.restaurantname), c.cuisineType from restaurant r, 
+                          restaurantcuisine c,area a,branchdeliveryarea b, branch br
+                          where r.restaurantID = c.restaurantID";
+
+                if(isset($_POST['filter'])) {
                     $query .= " AND c.cuisineType = '" . $_POST["cuisinetype"] ."'";
                 }
-                    
+                if(isset($_POST['filterarea']))
+                {
+                    $query.= " AND b.restaurantID = r.restaurantID
+                               AND b.areaID = (select areaID from area where areaname = '".$_POST['area']."' )";
+                }
+                
+                if(isset($_POST['viewactive']))
+                {
+                    $currenttime = date("H:i:s");
+                    $query.= " AND br.restaurantID = r.restaurantID
+                              AND br.openinghrs <= '".$currenttime."' ";
+                }
                 
                 $result = mysqli_query($conn, $query);
                 $restaurantsarray = array();
@@ -80,6 +108,8 @@
                    echo '<script type="text/javascript"> alert("Failure to show restaurants") </script>';        
                 }
 			?>
+                            </div>
+
             </header>
         </body>
         
@@ -91,13 +121,6 @@
             header('location:menu.php');
         }
         
-        //  if ($_SERVER['REQUEST_METHOD'] === 'POST')
- 
-        // elseif(isset($_POST['filter']))
-        // {
-        //     $_SESSION['currentcuisine'] = $_POST['filter'];
-        //     header('location:startorder.php');
-        // }   
         ?>
 
 

@@ -56,12 +56,25 @@
 
             <form action='managerestaurants.php' method='POST'>
                     Restaurant Name : <input type='text' name='droprestaurant'> <p>
-                    <input type='submit' name='drop' value='Delete'> <p> 
+                    <input type='submit' name='drop' value='drop'> <p> 
             </form>
                     <?php 
                         if(isset($_POST['drop']))
                         {
+                            $dropquery1 = "delete from branchphoneno where restaurantID = 
+                                           (select restaurantID from restaurant where restaurantname = '" . $_POST["droprestaurant"] ."')";
+                            $dropquery2 = "delete from branchdeliveryarea where restaurantID = 
+                                            (select restaurantID from restaurant where restaurantname = '" . $_POST["droprestaurant"] ."')";
+                            $dropquery3 = "delete from branch where restaurantID = 
+                                            (select restaurantID from restaurant where restaurantname = '" . $_POST["droprestaurant"] ."')";
+                            $dropquery4 = "delete from restaurantcuisine where restaurantID = 
+                                            (select restaurantID from restaurant where restaurantname = '" . $_POST["droprestaurant"] ."')";
                             $dropquery = "delete from restaurant where restaurantname = '" . $_POST["droprestaurant"] ."' ";
+                            
+                            $dropquery_run = mysqli_query($conn,$dropquery1);
+                            $dropquery_run = mysqli_query($conn,$dropquery2);
+                            $dropquery_run = mysqli_query($conn,$dropquery3);
+                            $dropquery_run = mysqli_query($conn,$dropquery4);
                             $dropquery_run = mysqli_query($conn,$dropquery);
                             echo "<script> location.href='managerestaurants.php'; </script>";
                         }

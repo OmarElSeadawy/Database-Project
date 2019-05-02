@@ -50,7 +50,9 @@
                 echo "<br>";
                 echo "<h2><a href='manageitems.php' style='color:#ccc000'> Manage Items </a></h2>";
                 echo "<br>";
-                echo "<h2><a href='managediscounts.php' style='color:#ccc000'> Manage discounts </a></h2>";
+                echo "<h2><a href='managediscounts.php' style='color:#ccc000'> Manage Discounts </a></h2>";
+                echo "<br>";
+                echo "<h2><a href='managediscountcards.php' style='color:#ccc000'> Manage Discount Cards </a></h2>";
             ?>
 
             </div>

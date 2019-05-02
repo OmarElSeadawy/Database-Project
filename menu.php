@@ -56,13 +56,13 @@
                         <th width="3%">Quantity</th>
                         <th width="40%">Description</th>
 						<th width="5%">Price</th>
-						<th width="5%">Action</th>
+						<!-- <th width="5%">Action</th> -->
                     </tr>
                     <br/>
                     <?php
                         
                         $query = "
-                        select i.itemname,i.itemdescription,c.customname,c.price,c.isAvailable from item i, customitem c
+                        select i.itemname,i.itemdescription,c.customname,c.price,c.isAvailable, i.itemid from item i, customitem c
                                     where i.itemid = c.itemid
                                     and i.itemid in
                                     (
@@ -103,7 +103,7 @@
 						<td> 1 </td>
 						<td> <?php echo $row["itemdescription"]; ?></td>
 						<td>$ <?php echo $row['price'];?></td>
-						<td><a href="menu.php?action=add&id=<?php echo $row["itemname"]; ?>"><span class="text-danger">Add</span></a></td>
+						<!-- <td><a href="menu.php?action=add&id=<?php echo $row["itemname"]; ?>"><span class="text-danger">Add</span></a></td> -->
                         <?php } ?>        
                     </tr>
 
@@ -113,7 +113,65 @@
                     ?>	
 				</table>
             </div>
-            
+
+                        <div class='welcome'>
+                            <form action='menu.php' method='POST' name='additem' > 
+                                <select name='selectitem' id='selectitem'>
+                            <?php
+                                $result = mysqli_query($conn, $query);
+                                if(mysqli_num_rows($result) > 0)
+                                {
+                                    while($row = mysqli_fetch_array($result))
+                                    {
+                                        if($row['isAvailable'] == 1)
+                                        {
+                            ?>
+                             <option value=<?php echo $row['itemid']; ?>|<?php echo $row['customname']; ?> > <?php echo $row['itemname']; ?> - <?php echo $row['customname']; ?> </option>";
+
+                            <?php
+                                        }
+                                    }
+                                }
+                            ?>	  
+                            <input name="addit" type='submit' value ='Add Item to Cart'> 
+                        </form>
+                        <?php
+                            if(isset($_POST['addit']))
+                            {
+                                // $timestamp = date('Y-m-d H:i:s','1299762201428');
+                                $timestamp = date('Y-m-d H:i:s');
+                                $explodevalue = explode('|',$_POST['selectitem']);
+                                $queryx = " select m.restaurantID,m.menuID,i.itemid,ii.itemname,c.customname,c.price
+                                            from menu m, restaurant r,menuitems i,item ii,customitem c
+                                            where m.restaurantID = r.restaurantID
+                                            AND ii.itemid = i.itemid
+                                            AND i.restaurantID = m.restaurantID
+                                            AND m.menuID = i.menuID
+                                            AND r.restaurantname = '".$_SESSION['currentmenu']."'
+                                            AND m.menutype = '".$time."'
+                                            AND i.itemid = c.itemid
+                                ";
+                                $query2 = $queryx . " AND i.itemid = '".$explodevalue[0]."' AND c.customname = '".$explodevalue[1]."'   ";
+                                $runquery2 = mysqli_query($conn,$query2);
+                                if(mysqli_num_rows($runquery2) == 1)
+                                    {
+                                       $row = mysqli_fetch_array($runquery2);
+                                       $insertquery = "
+                                       INSERT INTO `shoppingcart`(`username`, `restaurantID`, `menuID`, `itemID`,
+                                                                  `itemname`, `customname`, `price`, `timestamp`) 
+                                       VALUES ('".$_SESSION['username']."','".$row['restaurantID']."',
+                                               '".$row['menuID']."','".$row['itemid']."',
+                                               '".$row['itemname']."','".$row['customname']."',
+                                               '".$row['price']."','".$timestamp."')";
+
+                                        $runinsertquery = mysqli_query($conn,$insertquery);
+                                    }
+                                
+                            }
+                        
+                        ?>
+  
+                </div>
             </header>
         </body>
 

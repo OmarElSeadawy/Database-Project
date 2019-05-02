@@ -76,9 +76,9 @@
                 {
                     $currenttime = date("H:i:s");
                     $query.= " AND br.restaurantID = r.restaurantID
-                              AND br.openinghrs <= '".$currenttime."' ";
+                              AND br.openinghrs <= '".$currenttime."' 
+                              AND '".$currenttime."' <= '23:00:00' ";
                 }
-                
                 $result = mysqli_query($conn, $query);
                 $restaurantsarray = array();
 
@@ -102,10 +102,6 @@
 			</div>
 			<?php
 					}
-                }
-                else
-                {
-                   echo '<script type="text/javascript"> alert("Failure to show restaurants") </script>';        
                 }
 			?>
                             </div>

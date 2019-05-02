@@ -73,11 +73,11 @@
                 
                 echo "<a href='myorders.php' style='color:#ccc000'> My Orders </a>";
                 echo "<br>";
-                echo "<a href='modifyaccount.php' style='color:#cc0000'> Modify Information </a>";
+                echo "<a href='modifyaccount.php' style='color:#ccc000'> Modify Information </a>";
                 echo "<br>";
-                echo "<a href='changepassword.php' style='color:#cc0000'> Change Password </a>";
+                echo "<a href='changepassword.php' style='color:#ccc000'> Change Password </a>";
                 echo "<br>";
-                echo "<a href='manageaddresses.php' style='color:#cc0000'> Manage Addresses </a>";
+                echo "<a href='manageaddresses.php' style='color:#ccc000'> Manage Addresses </a>";
 			?>
 
             </div>

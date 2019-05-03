@@ -31,6 +31,8 @@
                                 <!-- User Homepage -->
                             <?php endif; ?>
                             <li onclick="window.location.href='profile.php'"> <a>Profile</a></li>                            
+                            <li onclick="window.location.href='cart.php'"> <a>Shopping Cart</a></li>                            
+
                             <li onclick="window.location.href='index.php'"> <a>Logout</a></li>
                     </ul>  
                     </div>
@@ -50,7 +52,6 @@
                             <option value= <?php echo $row['restaurantID'] ?> > <?php echo $row['restaurantname'] ?> </option>";
                         <?php } }?> 
                         </select>
-
                     <br/> 
                     <input name="show" type='submit' value ='show'> 
                 </form>

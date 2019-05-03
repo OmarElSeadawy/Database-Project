@@ -32,6 +32,7 @@
                                 <!-- User Homepage -->
                             <?php endif; ?>
                             <li onclick="window.location.href='profile.php'"> <a>Profile</a></li>                            
+                            <li onclick="window.location.href='cart.php'"> <a>Shopping Cart</a></li>                            
                             <li onclick="window.location.href='index.php'"> <a>Logout</a></li>
                     </ul>
                 </div>
@@ -166,7 +167,6 @@
 
                                         $runinsertquery = mysqli_query($conn,$insertquery);
                                     }
-                                
                             }
                         
                         ?>

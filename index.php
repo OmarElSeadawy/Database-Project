@@ -59,8 +59,13 @@
                 }
             }
 
-
         ?>
+    <form class='form' method="POST" action="send_link.php">
+            <h2>Forget Password</h2>
+            <input type="text" name="email" value='Enter Email'>
+            <input type="submit" name="submitmail">
+        </form>
+
     </div>
 
 

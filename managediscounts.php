@@ -51,7 +51,7 @@
 					while($row = mysqli_fetch_array($selectquery_run))
 					{
                     ?>
-                    <h3> Discount ID : <?php echo $row['discountID'] ?> - <?php echo $row['discountpercentage']*100 ?> % </h3><br>
+                    <h3> Discount ID : <?php echo $row['discountID'] ?> - <?php echo $row['discountpercentage']*100 ?> % - Ends at <?php echo $row['enddate'] ?> </h3><br>
                     <?php } } ?>
             
 

@@ -116,7 +116,9 @@
         {
             $_SESSION["currentmenu"] = $_POST["currentrestaurant"];
             echo $_POST["currentrestaurant"];
-            header('location:menu.php');
+            // header('location:menu.php');
+            echo "<script> location.href='menu.php'; </script>";
+
         }
         
         ?>

@@ -117,7 +117,8 @@ require 'dbconfig/dbconn.php';
                                         and restaurantID = '". $_POST['restaurantid']."'
                                         and orderID = '". $_POST['orderid'] ."'  ";
                             $addquery_run = mysqli_query($conn,$deletequery);
-                            echo "<script> location.href='orders.php'; </script>";
+                            echo $deletequery;
+                            // echo "<script> location.href='orders.php'; </script>";
         
                         }
                     

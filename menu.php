@@ -114,7 +114,6 @@
                     ?>	
 				</table>
             </div>
-
                         <div class='welcome'>
                             <form action='menu.php' method='POST' name='additem' > 
                                 <select name='selectitem' id='selectitem'>
@@ -136,10 +135,10 @@
                             ?>	  
                             <input name="addit" type='submit' value ='Add Item to Cart'> 
                         </form>
+                        
                         <?php
                             if(isset($_POST['addit']))
                             {
-                                // $timestamp = date('Y-m-d H:i:s','1299762201428');
                                 $timestamp = date('Y-m-d H:i:s');
                                 $explodevalue = explode('|',$_POST['selectitem']);
                                 $queryx = " select m.restaurantID,m.menuID,i.itemid,ii.itemname,c.customname,c.price
@@ -154,7 +153,7 @@
                                 ";
                                 $query2 = $queryx . " AND i.itemid = '".$explodevalue[0]."' AND c.customname = '".$explodevalue[1]."'   ";
                                 $runquery2 = mysqli_query($conn,$query2);
-                                if(mysqli_num_rows($runquery2) == 1)
+                                if(mysqli_num_rows($runquery2) > 0)
                                     {
                                        $row = mysqli_fetch_array($runquery2);
                                        $insertquery = "
@@ -164,7 +163,6 @@
                                                '".$row['menuID']."','".$row['itemid']."',
                                                '".$row['itemname']."','".$row['customname']."',
                                                '".$row['price']."','".$timestamp."')";
-
                                         $runinsertquery = mysqli_query($conn,$insertquery);
                                     }
                             }

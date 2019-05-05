@@ -56,7 +56,7 @@
             
              <!-- DELETING OTHER ADMIN USERS -->
 
-            <form action='manageadmins.php' method='POST'>
+            <form action='manageordering.php' method='POST'>
                     Username : <input type='text' name='dropusername'> <p>
                     <input type='submit' name='drop' value='Delete'> <p> 
             </form>
@@ -67,13 +67,13 @@
                             $query3_run = mysqli_query($conn,$query3);
                             $dropquery = "delete from user where username = '" . $_POST["dropusername"] ."' ";
                             $dropquery_run = mysqli_query($conn,$dropquery);
-                            echo "<script> location.href='manageadmins.php'; </script>";
+                            echo "<script> location.href='manageordering.php'; </script>";
                         }
                         ?>
             <!-- END OF DELETING ADMIN USERS  -->
 
             
-            <form action='manageadmins.php' method='POST'>
+            <form action='manageordering.php' method='POST'>
                 Username : <input type='text' name='username'><br>
                 First Name : <input type='text' name='firstname'><p>
                 Last Name : <input type='text' name='lastname'><br>
@@ -112,7 +112,7 @@
                     
                     $query_run = mysqli_query($conn,$query);
                     $query2_run = mysqli_query($conn,$query2);
-                    echo "<script> location.href='manageadmins.php'; </script>";
+                    echo "<script> location.href='manageordering.php'; </script>";
                 }
 
                 if(isset($_POST['add']))
@@ -126,7 +126,7 @@
                               '1', '" . $_POST["firstname"] ."', '" . $_POST["lastname"] ."'
                               , '" . $_POST["email"] ."', '1')";
                     $addquery_run = mysqli_query($conn,$addquery);
-                    echo "<script> location.href='manageadmins.php'; </script>";
+                    echo "<script> location.href='manageordering.php'; </script>";
 
                 }
             

@@ -13,6 +13,35 @@ require 'dbconfig/dbconn.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/startorder.css">
     <script src="js/index.js"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <!-- <script>
+        function ck()
+        {
+            $('#inlinesubmit_button').click(function(){
+                $.ajax({
+                    type: "POST",
+                    url: "cart.php",
+                data: {text:$('#discountc').val()}
+                });
+            });
+
+            var discountc = document.getElementById('discountc').value;
+            var dataString = 'discountc='+discountc;
+            $.ajax(
+                {
+                    type:"post",
+                    url: "cart.php",
+                    data:dataString,
+                    cache:false,
+                    success: function(html)
+                    {
+                        $('#msg').html(html);
+                    }
+                }
+            );
+            return false;
+        }
+    </script> -->
 </head>
 
         <body>
@@ -90,6 +119,9 @@ require 'dbconfig/dbconn.php';
                 </tbody>
                 </table>
                 
+                
+                    
+
                 <h2> To Remove Item from Cart </h2>
                 <form method='POST' name='dropitemcart' action='cart.php'>
                     Item ID : <input type='text' name='cartitemid'> <br>
@@ -102,8 +134,37 @@ require 'dbconfig/dbconn.php';
                     {
                         $deletequery = "delete from shoppingcart where itemID = '".$_POST['cartitemid']."'  AND customname = '".$_POST['cartcustomname']."'  ";
                         $runquery = mysqli_query($conn,$deletequery);
+                        echo "<script> location.href='cart.php'; </script>";
                     }
                 ?>
+
+                <h2> Check Your Discount Code Before Writing Comments or Placing Order </h2>                
+                <form name='discountform' action='cart.php' method='POST'>
+                        Discount Code : <input type='number' name='discountc'><br>
+                        <input type='submit' value='Check Code' name='checkdiscountcode'>
+                </form>
+                
+                <?php
+                    if(isset($_POST['checkdiscountcode']))
+                        {
+                            $discountquery = "select discountpercentage from discountcode where codeID = '".$_POST['discountc']."'
+                                      AND uses >= ( select count(orderID) from orders where codeID =  '".$_POST['discountc']."' ) ";
+                            $rundiscountquery = mysqli_query($conn,$discountquery);
+
+                            if(mysqli_num_rows($rundiscountquery) > 0)
+                                {
+                                    $row = mysqli_fetch_array($rundiscountquery);
+                                    $_SESSION['discountcoderun'] = $row['discountpercentage'];
+                                }
+                            else
+                                {
+                                    $_SESSION['discountcoderun'] = "Invalid Discount Code";
+                                }
+                        }
+
+                ?>
+
+                <?php echo $_SESSION['discountcoderun']; ?>
                 <h2> To Place an Order with Items in cart </h2>
                 <form method='POST' name='placeorder' action='cart.php'>
 
@@ -123,8 +184,7 @@ require 'dbconfig/dbconn.php';
                         <?php } }?> 
                         </select>
                     <br> 
-
-                    Discount Code : <input type='number' name='discountc'>
+                    
                     <?php
                         $querydelivery = "select deliverycost from branchdeliveryarea where restaurantID = '".$_SESSION['restaurantidforcost']."' ";
                         $runcost = mysqli_query($conn,$querydelivery);
@@ -136,16 +196,28 @@ require 'dbconfig/dbconn.php';
                         $selectquery_run = mysqli_query($conn,$selectquery);
                         $discount = mysqli_fetch_array($selectquery_run);
                         $discountidused = $discount['discountID'];
-                        // $selectquery2 = "select * from discountcode where codeID = ";
-                        // $selectquery_run2 = mysqli_query($conn,$selectquery2);
-                        // $discountc = mysqli_fetch_array($selectquery_run2);
+
+                        $finaldiscount = 0;
+                        if($_SESSION['discountcoderun'] != "Invalid Discount Code")
+                        {
+                            if($discount['discountpercentage'] >= $_SESSION['discountcoderun'])
+                                $finaldiscount = $discount['discountpercentage'];
+                            else
+                                $finaldiscount = $_SESSION['discountcoderun'];      
+                        }
+                        else
+                        {
+                            if(isset($discount['discountpercentage']))
+                                $finaldiscount = $discount['discountpercentage'];
+                            echo "Invalid Discount Code";
+                        }
 
                     ?>
                     <br>
                     <h3> Total Price : <?php echo $total; ?> EGP </h3>
                     <h3> Gross Price (+VAT) : <?php echo $total*1.14; ?> EGP </h3> 
                     <h3> Net Price (+Delivery) : <?php echo $total*1.14 + $cost['deliverycost']; ?> EGP </h3> 
-                    <h3> Net Price (-Discount) : <?php echo $total*1.14 + $cost['deliverycost'] - ($total*$discount['discountpercentage']) ?> EGP </h3> <br>
+                    <h3> Net Price (-Discount) : <?php echo $total*1.14 + $cost['deliverycost'] - ($total*$finaldiscount) ?> EGP </h3> <br>
                     <input name="place" type='submit' value ='Place Order'>
                     
                 </form>
@@ -156,10 +228,10 @@ require 'dbconfig/dbconn.php';
                         $query1 = "INSERT INTO `orders`(`branchID`, `restaurantID`, `orderID`, `discountID`,
                                                          `codeID`, `orderstatus`, `comments`)
                                     VALUES ('1','".$_SESSION['restaurantidforcost']."',NULL,
-                                            '".$discountidused."',NULL,
+                                            NULL,NULL ,
                                             'Sent','".$_POST['comments']."')";
                         $query1run = mysqli_query($conn,$query1);
-                        
+                        echo $query1;
                         $testquery = "select * from orders";
                         $testqueryrun = mysqli_query($conn,$testquery);
                         if(mysqli_num_rows($testqueryrun) > 0)
@@ -193,7 +265,7 @@ require 'dbconfig/dbconn.php';
                         $deletequeryall = "delete from shoppingcart where username = '".$_SESSION['username']."' ";
                         $deletallrun = mysqli_query($conn,$deletequeryall);
 
-                        echo "<script> location.href='cart.php'; </script>";
+                        // echo "<script> location.href='cart.php'; </script>";
 
                     }
                 

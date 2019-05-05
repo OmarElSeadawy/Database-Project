@@ -10,7 +10,7 @@ There are three kinds of users in the system:
 •	Admins
 •	Ordering Staff
 •	End-Users Admin users can:
-•	Add other admins
+•	Add other admin
 •	Change other admin passwords (a record must be kept)
 •	Delete other admins (a record must be kept)
 •	Add Ordering Staff users (a record must be kept)

@@ -12,7 +12,9 @@ There are three kinds of users in the system:
 
 •	Ordering Staff
 
-•	End-Users Admin users can:
+•	End-Users
+
+Admin users can:
 
 •	Add other admin
 
@@ -42,6 +44,7 @@ There are three kinds of users in the system:
 
 •	Modify discount codes
 
+
 Ordering Staff can:
 
 •	Change their own password
@@ -51,6 +54,7 @@ Ordering Staff can:
 •	Update an order’s status (Received, Preparing, Out for Delivery, Delivered)
 
 •	Cancel an order 
+
 
 End-Users can:
 
@@ -80,6 +84,7 @@ End-Users can:
 
 •	View order history
 
+Features :
 
 •	Giving the web application a modern look and feel (complete with AJAX calls, when necessary)
 
